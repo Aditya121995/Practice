@@ -7,7 +7,7 @@ Some problems to practice lld and implementing it
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[OpinionPoll][https://www.notion.so/Opinion-poll-calculation-ad0fdac585704bd5a1c537f1ff1be8ab]
+[OpinionPoll](https://www.notion.so/Opinion-poll-calculation-ad0fdac585704bd5a1c537f1ff1be8ab)
 
 
 ![](SystemDesign/OpinionPoll.png)
