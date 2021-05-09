@@ -3,7 +3,7 @@ Some problems to practice lld and implementing it
 [SnakesAndLadder](https://workat.tech/machine-coding/practice/snake-and-ladder-problem-zgtac9lxwntg)
 
 
-![](SystemDesign/SnakeAndLadder.png)
+![Design](SystemDesign/SnakeAndLadder.png)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -13,3 +13,10 @@ Some problems to practice lld and implementing it
 ![](SystemDesign/OpinionPoll.png)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[SplitWise](https://workat.tech/machine-coding/practice/splitwise-problem-0kp2yneec2q2)
+
+![](SystemDesign/splitWise.png)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
