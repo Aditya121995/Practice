@@ -6,10 +6,12 @@ public class ExpenseCreator {
     public Expense createExpense(ExpenseType expenseType, User paidBy, Double paidAmount, List<SplitKeeper> splits) {
         switch (expenseType) {
             case EQUAL:
-                double splitAmount = Math.round((paidAmount/splits.size() * 100.0) / 100.0 ) ;
-                for (SplitKeeper split : splits) {
-                    split.setAmount(splitAmount);
-                }
+                double splitAmount = Math.round(paidAmount/splits.size() * 100.0) / 100.0;
+                splits.stream().skip(0).forEach(s-> {
+                    s.setAmount(splitAmount);
+                });
+                double amountSoFar = (splits.size()-1)*splitAmount;
+                splits.get(0).setAmount(paidAmount - amountSoFar);
                 return new EqualExpense(paidBy, paidAmount, splits);
             case EXACT:
                 return new ExactExpense(paidBy, paidAmount, splits);
