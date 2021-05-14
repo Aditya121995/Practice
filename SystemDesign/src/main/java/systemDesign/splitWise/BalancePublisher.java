@@ -4,11 +4,12 @@ import java.util.Map;
 
 public class BalancePublisher {
 
-    public void showBalancesOfUser(String userId, Map<String, Map<String, Double>> balanceBook, Map<String, User> userIdToUserMap) {
-        Map<String, Double> balances = balanceBook.get(userId);
+    public void showBalancesOfUser(String userId, Map<String, User> userIdToUserMap) {
+        User user = userIdToUserMap.get(userId);
+        Map<User, Double> balances =user.getUserBalanceBook();
         boolean haveBalances = false;
-        for (String id : balances.keySet()) {
-            haveBalances = isHaveBalances(userId, balances, haveBalances, id, userIdToUserMap);
+        for (User usr : balances.keySet()) {
+            haveBalances = isHaveBalances(userId, balances, haveBalances, usr.getUserId(), userIdToUserMap);
         }
 
         if (!haveBalances) {
@@ -16,14 +17,15 @@ public class BalancePublisher {
         }
     }
 
-    public void showBalances(Map<String, Map<String, Double>> balanceBook, Map<String, User> userIdToUserMap) {
+    public void showBalances(Map<String, User> userIdToUserMap) {
         boolean haveBalances = false;
 
-        for (String userId : balanceBook.keySet()) {
-            Map<String, Double> balances = balanceBook.get(userId);
-            for (String id : balances.keySet()) {
-                if (balances.get(id) > 0) {
-                    haveBalances = isHaveBalances(userId, balances, haveBalances, id, userIdToUserMap);
+        for (String userId : userIdToUserMap.keySet()) {
+            User user = userIdToUserMap.get(userId);
+            Map<User, Double> balances = user.getUserBalanceBook();
+            for (User usr : balances.keySet()) {
+                if (balances.get(usr) > 0) {
+                    haveBalances = isHaveBalances(userId, balances, haveBalances, usr.getUserId(), userIdToUserMap);
                 }
             }
         }
@@ -33,12 +35,12 @@ public class BalancePublisher {
         }
     }
 
-    private boolean isHaveBalances(String userId, Map<String, Double> balances, boolean haveBalances, String id, Map<String, User> userIdToUserMap) {
-        if (balances.get(id) > 0) {
-            System.out.println(userIdToUserMap.get(id).getName() + " owes " + userIdToUserMap.get(userId).getName() + ": " + balances.get(id));
+    private boolean isHaveBalances(String userId, Map<User, Double> balances, boolean haveBalances, String id, Map<String, User> userIdToUserMap) {
+        if (balances.get(userIdToUserMap.get(id)) > 0) {
+            System.out.println(userIdToUserMap.get(id).getName() + " owes " + userIdToUserMap.get(userId).getName() + ": " + balances.get(userIdToUserMap.get(id)));
             haveBalances = true;
-        } else if (balances.get(id) < 0) {
-            System.out.println(userIdToUserMap.get(userId).getName() + " owes " + userIdToUserMap.get(id).getName() + ": " + Math.abs(balances.get(id)));
+        } else if (balances.get(userIdToUserMap.get(id)) < 0) {
+            System.out.println(userIdToUserMap.get(userId).getName() + " owes " + userIdToUserMap.get(id).getName() + ": " + Math.abs(balances.get(userIdToUserMap.get(id))));
             haveBalances = true;
         }
         return haveBalances;
